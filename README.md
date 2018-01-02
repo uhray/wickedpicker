@@ -47,6 +47,7 @@
         afterShow: null, //A function to be called after the Wickedpicker is closed/hidden
         show: null, //A function to be called when the Wickedpicker is shown
         clearable: false, //Make the picker's input clearable (has clickable "x")
+        container: document.body, //Where to place the picker (position absolute should be relative to this)
     };
     $('.timepicker').wickedpicker(options);
 ```

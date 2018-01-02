@@ -51,6 +51,7 @@
             clearable: false,
             closeOnClickOutside: true,
             onClickOutside: function() {},
+            container: document.body
         };
 
     /*
@@ -121,11 +122,16 @@
                 }
                 this.setTime(newTime);
             }
+
             this.timepicker.css({
                 'z-index': this.element.css('z-index') + 1,
                 position: 'absolute',
                 left: timepickerPos.left,
-                top: timepickerPos.top + $(element)[0].offsetHeight
+                left: $(element).get(0).getBoundingClientRect().x -
+                  $(this.options.container).get(0).getBoundingClientRect().x,
+                top: $(element).get(0).getBoundingClientRect().y -
+                  $(this.options.container).get(0).getBoundingClientRect().y +
+                  $(element)[0].offsetHeight
             }).show();
             //If there is a show function, then call it with the input calling the timepicker and the
             // timepicker itself
@@ -175,7 +181,7 @@
                     picker += '<li class="wickedpicker__controls__control--separator"><span class="wickedpicker__controls__control--separator-inner">:</span></li><li class="wickedpicker__controls__control"><span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--seconds" tabindex="-1">00</span><span class="' + this.options.downArrow + '"></span> </li>';
                 }
                 picker += '<li class="wickedpicker__controls__control"><span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--meridiem" tabindex="-1">AM</span><span class="' + this.options.downArrow + '"></span></li></ul></div>';
-                $('body').append(picker);
+                $(this.options.container).append(picker);
                 this.attachKeyboardEvents();
             }
         },
